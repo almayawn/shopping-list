@@ -1,7 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Shopping List Page :D</h1>
+    <nav class="navbar sticky-top navbar-dark bg-dark">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="#">Alma Laras Bestari</a>
+        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"> -->
+        <a href="{% url 'main:logout' %}">
+            <button class="btn btn-outline-info" type="button">Logout</button>
+        </a>
+            <!-- <span class="navbar-toggler-icon"></span> -->
+        <!-- </button> -->
+        <!-- <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link" href="{% url 'main:logout' %}">Logout</a>
+        </div> -->
+        </div>
+    </nav>
+    <h1>Shopping List Page</h1>
 
     <h5>Name:</h5>
     <p>{{name}}</p>
@@ -24,7 +40,19 @@
                 <td>{{product.name}}</td>
                 <td>{{product.price}}</td>
                 <td>{{product.description}}</td>
-                <td>{{product.date_added}}</td>
+                <td>
+                    {{product.date_added}}
+                    <a href="{% url 'main:edit_product' product.pk %}">
+                        <button>
+                            Edit
+                        </button>
+                    </a>
+                    <a href="{% url 'main:delete_product' product.pk %}">
+                          <button>
+                              Delete
+                          </button>
+                      </a>
+                </td>
             </tr>
         {% endfor %}
     </table>
@@ -36,12 +64,6 @@
     <a href="{% url 'main:create_product' %}">
         <button>
             Add New Product
-        </button>
-    </a>
-
-    <a href="{% url 'main:logout' %}">
-        <button>
-            Logout
         </button>
     </a>
     
